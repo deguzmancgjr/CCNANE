@@ -1,0 +1,39 @@
+config t
+hostname A1
+enable secret pass
+service password-encryption
+no logging console
+no ip domain-lookup
+line console 0
+password pass
+login
+exec-timeout 0 0
+line vty 0 4
+password pass
+login
+exec-timeout 0 0
+
+int vlan 200
+no shut
+ip add 192.168.1.131 255.255.255.128
+
+do sh ip int br | ex una
+
+conf t
+int e0/0
+switchport mode access
+switchport access vlan 10
+do sh vlan brief
+
+Router1#erase nvram:
+Router1#reload
+Router#show running-config
+Router1#show startup-config 
+hostname Router1
+show running-config
+
+config t
+ vlan 200
+ interface vlan 200
+ no shutdown
+ no switchport - magkaroon address command

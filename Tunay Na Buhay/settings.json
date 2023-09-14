@@ -1,0 +1,21 @@
+"editor.tokenColorCustomizations" : {
+    "textMateRules": [
+        {
+            "scope": "entity.name.class.interface.ethernet.cisco",
+            "settings": {
+                "foreground": "#328f16",
+                "fontStyle": "italic"
+            }
+        },
+        {
+            "scope": [
+                "keyword.other.address",
+                "constant.numeric"
+            ],
+            "settings": {
+                "foreground": "#cc0ca2",
+                "fontStyle": "underline"
+            }
+        }
+    ]
+}

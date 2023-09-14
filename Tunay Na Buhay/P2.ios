@@ -1,0 +1,5 @@
+conf t
+int e1/0
+ip add dhcp
+no shut
+do sh ip int br | ex una

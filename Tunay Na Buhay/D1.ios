@@ -1,0 +1,65 @@
+config t
+hostname D1
+enable secret pass
+service password-encryption
+no logging console
+no ip domain-lookup
+line console 0
+password pass
+login
+exec-timeout 0 0
+line vty 0 4
+password pass
+login
+exec-timeout 0 0
+int e1/1
+no shut
+ip add 10.1.4.6 255.255.255.252
+
+int vlan 10
+no shut
+ip add 10.2.1.1 255.255.255.252
+
+int vlan 20
+no shut
+ip add 10.2.2.1 255.255.255.252
+
+int vlan 200
+no shut
+ip add 192.168.1.129 255.255.255.128
+
+do sh ip int br | ex una
+
+!D1: will give .101 - .199
+vlan 10
+name homevlansep11
+exit
+ip dhcp Excluded-address 10.2.1.1 10.2.1.254
+ip dhcp pool vlan10
+network 10.2.1.0 255.255.255.0
+default-router 10.2.1.1
+domain-name army.mil.ph
+dns-server 8.8.8.8
+option 150 ip 1.1.1.1
+
+
+Router1#erase nvram:
+Erasing the nvram filesystem will remove all files! Continue? [confirm] <enter>
+[OK]
+Erase of nvram: complete
+Router1#reload
+
+
+Router#show running-config
+
+[OK]
+Router1#show startup-config 
+
+hostname Router1
+show running-config
+
+config t
+ vlan 200
+ interface vlan 200
+ no shutdown
+ no switchport - magkaroon address command
