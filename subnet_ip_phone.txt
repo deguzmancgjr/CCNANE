@@ -1,0 +1,17 @@
+config t
+vlan 25
+ name sablaykami.com
+ exit
+Int vlan 25
+ no shut
+ ip add 192.168.88.32 255.255.255.224
+ip dhcp excluded-add 192.168.88.33 192.168.88.37
+ip dhcp pool sablaykami.com
+ network 192.168.88.0 255.255.255.224
+ default-router 192.168.88.33
+ domain-name sablaykami.com
+ dns-server 10.42.16.10
+ option 150 ip 10.42.16.8
+ Int Fa 0/7
+  swi acc vlan 25
+  do sh ip dhcp binding
