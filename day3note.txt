@@ -1,0 +1,28 @@
+router eigrp 100
+
+
+
+@Cucm
+router bgp 4242
+neighbor 10.42.100.4 remote-as 4242
+
+@edge
+
+config t 
+
+router bgp 42
+neighbor 10.42.42.4 remote-as 4242
+neighbor 200.0.0.11 remote-as 11
+neighbor 200.0.0.11 remote-as 11
+neighbor 200.0.0.12 remote-as 12
+neighbor 200.0.0.31 remote-as 31
+neighbor 200.0.0.32 remote-as 32
+neighbor 200.0.0.41 remote-as 41
+neighbor 200.0.0.51 remote-as 51
+neighbor 200.0.0.52 remote-as 52
+neighbor 200.0.0.61 remote-as 61
+neighbor 200.0.0.62 remote-as 62
+neighbor 200.0.0.71 remote-as 71
+neighbor 200.0.0.72 remote-as 72
+network 200.0.0.0 mask 255.255.255.0
+network 10.42.42.0 mask 255.255.255.0
