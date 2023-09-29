@@ -94,7 +94,7 @@ router ospf 1
 	network 3.3.3.3 0.0.0.0 area 0
 	network 10.1.1.4 0.0.0.3 area 0
 	network 10.1.1.8 0.0.0.3 area 34
-
+end
 R2:
 config t
 Int loopback 0
@@ -105,7 +105,7 @@ network 2.2.2.2 0.0.0.0 area 0
 router ospf 1
 network 10.1.1.4 0.0.0.3 area 0
 network 10.1.1.0 0.0.0.3 area 12
-
+end
 R1:
 config t
 Int loopback 0
@@ -115,7 +115,7 @@ router-id 1.1.1.1
 network 1.1.1.1 0.0.0.0 area 12
 router ospf 1
 network 10.1.1.0 0.0.0.3 area 12
-
+end
 OSPF checking:
 sh ip protocols
 sh ip ospf neighbor
@@ -126,7 +126,7 @@ TASK8: route redistribution: join/combining
 diffrent routing protocols:
 halo si eigrp at ospf.
 R4:
-config T
+config t
 router eigrp 100
 redistribute ospf 1 metric 10000 100 255 1 1500
  exit
@@ -233,14 +233,20 @@ default-information originate
 
 PART 5:
 https://www.youtube.com/watch?v=sI4g6nYMeXk
-
+halo si eigrp at ospf.
+R4:
+config T
+router eigrp 100
+redistribute ospf 1 metric 10000 100 255 1 1500
+ exit
+router ospf 1
+redistribute eigrp 100 subnets
+end
 ******************
 
 Ito naman po for VPN 😁
 
 https://www.youtube.com/watch?v=zHhVjUPY5jY
-PART 1:
-https://www.youtube.com/watch?v=Lm_CAYU98js
 
 	
 	
