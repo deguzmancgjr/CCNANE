@@ -248,7 +248,59 @@ Ito naman po for VPN 😁
 
 https://www.youtube.com/watch?v=zHhVjUPY5jY
 
-	
-	
+@vpnPH:
 
+conf t
+int gi 1
+no shut
+ip add dhcp
+int gi 2
+ip add 200.0.0.1 255.255.255.0
+no shut
+int gi 3
+ip add 10.10.1.1 255.255.255.0
+no shut
+end
 
+@vpnJPN:
+
+conf t
+int gi 1
+no shut
+ip add dhcp
+int gi 2
+ip add 200.0.0.2 255.255.255.0
+no shut
+int gi 3
+ip add 10.20.2.1 255.255.255.0
+no shut
+end
+
+key= secretkey123
+show crypto session
+Browser config
+@JPN
+##TUNNEL
+Tunnel IP = 172.16.0.2 
+tunnel subnet mask =  255.255.255.0
+Source interface = GigabitEthernet2
+Remote peer IP = 200.0.0.1
+Pre-shared key = secretkey123
+Description =site to site ipsec tunnel to PHP
+##NETWORKS
+remote subnet
+10.10.1.1 
+255.255.255.0
+
+@PHP
+##TUNNEL
+Tunnel IP = 172.16.0.1 
+tunnel subnet mask =  255.255.255.0
+Source interface = GigabitEthernet2
+Remote peer IP = 200.0.0.2
+Pre-shared key = secretkey123
+Description =site to site ipsec tunnel to japan
+##NETWORKS
+remote subnet
+10.10.1.1 
+255.255.255.0
