@@ -289,7 +289,7 @@ Pre-shared key = secretkey123
 Description =site to site ipsec tunnel to PHP
 ##NETWORKS
 remote subnet
-10.10.1.1 
+10.10.1.0 
 255.255.255.0
 
 @PHP
@@ -302,5 +302,5 @@ Pre-shared key = secretkey123
 Description =site to site ipsec tunnel to japan
 ##NETWORKS
 remote subnet
-10.10.1.1 
+10.20.2.0 
 255.255.255.0
