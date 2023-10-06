@@ -1,0 +1,189 @@
+day 5:
+
+task 1 : network switching and design.
+
+80% of devices in datacenter are switches
+
+task 2 9 of 10 swithes : forgotten password
+mental count for 12 sec
+
+bura lahat
+flash_init
+delete flash:config.text
+
+keep lahat
+flash_init
+rename flash:config.text flash:config.bak 
+boot
+
+task 2 learning about switching health
+how to know if switch is?
+healthy: all green and flashing green
+sick: blinking orange
+dying: solid orange
+superdead:no light -> powerSupply
+
+Green= ok
+yellow/amber = syet!
+
+Task 3 :switching Timers : switches laging on time
+
+30sec = connectivity time
+why?
+pangmayaman:
+spanning-tree-protocol STP
+ vs pangmahirap sa switch.
+
+
+Task 4:  Mastering the 4 super heroes of switching : expert
+Bridge Identifier: 
+hello time
+forward delay
+
+switching 5 super heroes. Access vs Trunck
+802.1Qpid: trunking protocol 
+			make switches love each(all other)
+802.1Darna:spanning-tree-protocol 
+			protects switches slowly and with mercy
+802.1Wonderwoman: RapidSTP
+			Brutally Protection switch quickly and no mercy ,Killwithlove
+802.1Superman: MultipleInstallSTP
+			 Protect Many Switches all at the same time
+802.1X-men:later
+
+Task 5: Learning STP 802.1D or darna
+CISCO invented the switch, VLAN, stp
+stp port states:
+BLK		  - orange
+LIS - 15s - orange
+LRN - 15s - orange
+FWD - 30s - green
+
+STPTimers: 
+hello: 2s
+fwd: 15s * 2
+max age : 20s
+
+STP port roles:
+
+designated port:
+
+root port:
+
+alternate port:
+
+back port:
+
+Task 6 How to stop opns in a govt/private network
+
+attack the switch functions
+normal switch
+mac learning
+mac filtering
+mac forwarding
+loop avoidance (expensive)
+
+cisco, hp, juniper, dell, huawei, fortinet.
+
+
+802.1Q: trunking protocol, ISL protocol: OldInvented by Cisco.
+
+Access port
+trunk port
+
+SPANNING-TREE PROTOCOL: 802.1D
+wireshark = bridge priority is 32768 = very Hackable!
+" bobo/inutil ang Network Engineer nyo sa company!"
+Protect the Most Important SWitch in your 
+Office: RootBridge = TAAS, 2ndRootBridge = BABA:
+32786 = default
+
+TAAS:/d1       32786 --> 24576
+Config t
+spanning-tree mode pvst
+spanning-tree vlan 1-100 root Primary
+do sh spanning-tree vlan 1
+BABA:/d2
+Config t              32768->   28672
+spanning-tree mode pvst
+spanning-tree vlan 1-100 root Secondary
+do sh spanning-tree vlan 1
+
+ACCESS PORTS VS TRUNK PORTS:
+Trunk Ports: switch to switch:
+TAAS/BABA:
+config t
+Int Range fa0/10-12
+ switchport trunk Encap Dot1Q
+ switchport mode trunk
+ do sh int trunk
+
+TASK 8: 3 types of traffic in your network for switch
+cellphonetext kilala 1:1 -> unicasttext
+				1:some -> multicast =01
+				1:all -> broadcast = ffff - virus
+				
+how to get fired
+
+taas/baba
+config t
+no spanning-tree vlan 1 /bawal maglagay ng lazada switch dapat cisco
+
+
+TASK9: SPANNING-TREE PROTOCOL: 802.1D
+wireshark = bridge priority is 32768 = very Hackable!
+" bobo/inutil ang Network Engineer nyo sa company!"
+Protect the Most Important SWitch in your 
+Office: RootBridge = TAAS, 2ndRootBridge = BABA:
+TAAS:/d1       32786 --> 24576
+Config t
+spanning-tree mode pvst
+spanning-tree vlan 1-100 root Primary
+do sh spanning-tree vlan 1
+BABA:/d2  32768->   28672
+Config t            
+spanning-tree mode pvst
+spanning-tree vlan 1-100 root Secondary
+do sh spanning-tree vlan 1
+
+TASK10: Rapid Spanning-tree Protocol: 802.1w
+
+802.1D vs 802.1W
+d : blk, lis, lrn, fwd = 30s
+VS
+ww : discard, lis, rx/tx
+
+TAAs/BABA:
+config t
+spanning-tree Mode Rapid-pvst
+
+do sh spanning-tree vlan 1
+configure 802.1w/RapidSTP:
+
+TAAS: RootBridge
+config t
+spanning-tree Mode Rapid-pvst
+spanning-tree BackBoneFast
+spanning-tree portfast bpduguard default
+Int Range fa0/1-8
+   spanning-tree Portfast
+@BABA:
+config t
+spanning-tree Mode Rapid-pvst
+spanning-tree UplinkFast
+spanning-tree portfast bpduguard default
+Int Range fa0/1-8
+  spanning-tree Portfast
+end
+
+802.1WDoes NOT forgive Mistakes/KIll it.
+#sh int status err-disabled 
+TAAS: bounce/UP/down
+config t
+int fa 0/1
+ shut
+ no shut
+int fa 0/7
+ shut
+ no shut
+end
